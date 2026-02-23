@@ -108,6 +108,22 @@ API version header: `X-GitHub-Api-Version: 2022-11-28`
 - `npm run watch` — compile in watch mode
 - `npm run package` — package extension with `npx -y @vscode/vsce@latest package`
 
+## Release
+
+To create a new release and push `.vsix` to GitHub Releases:
+
+1. Update version in `package.json` (semver format)
+2. Commit changes
+3. Create tag (matches version):
+   ```bash
+   git tag v0.2.0
+   git push origin main
+   git push origin v0.2.0
+   ```
+4. GitHub Actions workflow triggers automatically:
+   - Builds and packages extension
+   - Creates GitHub Release with `.vsix` artifact
+
 ### Project structure
 
 ```text
