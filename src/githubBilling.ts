@@ -5,9 +5,13 @@ export type PremiumRequestUsageItem = {
   sku: string;
   model?: string;
   unitType: string;
+  pricePerUnit?: number;
   grossQuantity: number;
+  grossAmount?: number;
   discountQuantity: number;
+  discountAmount?: number;
   netQuantity: number;
+  netAmount?: number;
 };
 
 export type PremiumRequestUsageResponse = {
@@ -18,6 +22,10 @@ export type UsageTotals = {
   includedConsumed: number;
   billed: number;
   total: number;
+  includedAmount: number;
+  billedAmount: number;
+  totalAmount: number;
+  hasAmountData: boolean;
 };
 
 const GITHUB_API = "https://api.github.com";
@@ -49,7 +57,7 @@ export async function getGitHubTokenOrThrow(
     return { token: secret.trim(), source: "secretToken" };
   }
 
-  const session = await vscode.authentication.getSession("github", ["read:user"], {
+  const session = await vscode.authentication.getSession("github", ["user"], {
     createIfNone: true
   });
 
@@ -85,6 +93,20 @@ export function sumUsage(
   const includedConsumed = filtered.reduce((a, i) => a + (i.discountQuantity ?? 0), 0);
   const billed = filtered.reduce((a, i) => a + (i.netQuantity ?? 0), 0);
   const total = filtered.reduce((a, i) => a + (i.grossQuantity ?? 0), 0);
+  const includedAmount = filtered.reduce((a, i) => a + (i.discountAmount ?? 0), 0);
+  const billedAmount = filtered.reduce((a, i) => a + (i.netAmount ?? 0), 0);
+  const totalAmount = filtered.reduce((a, i) => a + (i.grossAmount ?? 0), 0);
+  const hasAmountData = filtered.some(i =>
+    i.grossAmount !== undefined || i.netAmount !== undefined || i.discountAmount !== undefined
+  );
 
-  return { includedConsumed, billed, total };
+  return {
+    includedConsumed,
+    billed,
+    total,
+    includedAmount,
+    billedAmount,
+    totalAmount,
+    hasAmountData
+  };
 }

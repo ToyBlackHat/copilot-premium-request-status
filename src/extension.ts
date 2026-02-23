@@ -9,6 +9,15 @@ import {
 let statusItem: vscode.StatusBarItem | undefined;
 let refreshTimer: NodeJS.Timeout | undefined;
 
+function formatUsd(value: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(value);
+}
+
 function getConfig() {
   const cfg = vscode.workspace.getConfiguration("copilotPremiumRequests");
   return {
@@ -19,11 +28,16 @@ function getConfig() {
   };
 }
 
-function setStatus(text: string, tooltip?: string, isError?: boolean) {
+function setStatus(
+  text: string,
+  tooltip?: string,
+  isError?: boolean,
+  command: string = "copilotPremiumRequests.refresh"
+) {
   if (!statusItem) return;
   statusItem.text = text;
   statusItem.tooltip = tooltip;
-  statusItem.command = "copilotPremiumRequests.refresh";
+  statusItem.command = command;
   statusItem.backgroundColor = isError
     ? new vscode.ThemeColor("statusBarItem.errorBackground")
     : undefined;
@@ -49,12 +63,22 @@ async function refreshNow(ctx: vscode.ExtensionContext) {
     const hh = String(ts.getHours()).padStart(2, "0");
     const mm = String(ts.getMinutes()).padStart(2, "0");
 
-    const text = `${icon} Inc ${totals.includedConsumed} | Billed ${totals.billed}`;
+    const billedAmountSuffix = totals.hasAmountData
+      ? `(${formatUsd(totals.billedAmount)})`
+      : "";
+    const text = `${icon} Incl: ${totals.includedConsumed} | Bill: ${totals.billed}${billedAmountSuffix}`;
+    const amountLines = totals.hasAmountData
+      ?
+        `Included amount: ${formatUsd(totals.includedAmount)}\n` +
+        `Billed amount: ${formatUsd(totals.billedAmount)}\n` +
+        `Total amount: ${formatUsd(totals.totalAmount)}\n`
+      : "Amounts: not provided by API for this account/period\n";
     const tooltip =
       `Premium Requests (${productFilter || "All products"})\n` +
       `Included: ${totals.includedConsumed}\n` +
       `Billed: ${totals.billed}\n` +
       `Total: ${totals.total}\n` +
+      amountLines +
       `User: ${login}\n` +
       `Auth: ${source}\n` +
       `Last sync: ${hh}:${mm}`;
@@ -69,7 +93,7 @@ async function refreshNow(ctx: vscode.ExtensionContext) {
       `${msg}\n\n` +
       `Use command: Copilot Premium Requests: Set / Update Token (Secure) with PAT (Plan: read-only).`;
 
-    setStatus(`${icon} PR (auth?)`, hint, true);
+    setStatus(`${icon} PR (auth?)`, hint, true, "copilotPremiumRequests.setToken");
   }
 }
 
