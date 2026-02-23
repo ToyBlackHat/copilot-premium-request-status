@@ -14,6 +14,31 @@
     "url": "https://github.com/ToyBlackHat/copilot-premium-request-status/issues"
   },
   "homepage": "https://github.com/ToyBlackHat/copilot-premium-request-status#readme",
+  "galleryBanner": {
+    "color": "#1f6feb",
+    "theme": "dark"
+  },
+  "keywords": [
+    "copilot",
+    "billing",
+    "github",
+    "usage",
+    "status-bar",
+    "monitoring"
+  ],
+  "badges": [
+    {
+      "url": "https://github.com/ToyBlackHat/copilot-premium-request-status/actions/workflows/ci.yml/badge.svg",
+      "href": "https://github.com/ToyBlackHat/copilot-premium-request-status",
+      "description": "CI"
+    },
+    {
+      "url": "https://img.shields.io/github/license/ToyBlackHat/copilot-premium-request-status",
+      "href": "https://github.com/ToyBlackHat/copilot-premium-request-status/blob/main/LICENSE",
+      "description": "License"
+    }
+  ],
+  "markdown": "github",
   "files": [
     "dist",
     "README.md",
