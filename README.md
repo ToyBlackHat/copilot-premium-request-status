@@ -38,7 +38,7 @@ Then run the extension in VS Code using **Run Extension** (F5).
 
 3. Press `F5` (or use **Run and Debug** → **Run Extension**).
 4. In the new Extension Development Host window:
-  - Open Command Palette
+  - Open Command Palette (`Cmd+Shift+P`)
   - Run **Copilot Premium Requests: Set / Update Token (Secure)**
   - Paste PAT with **Plan: read-only**
   - Check status bar for usage values
