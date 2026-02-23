@@ -42,6 +42,7 @@
   "files": [
     "dist",
     "README.md",
+    "ABOUT.md",
     "LICENSE",
     "package.json"
   ],
