@@ -1,5 +1,13 @@
 # Copilot Premium Requests Status
 
+[![CI](https://github.com/ToyBlackHat/copilot-premium-request-status/actions/workflows/ci.yml/badge.svg)](https://github.com/ToyBlackHat/copilot-premium-request-status/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/ToyBlackHat/copilot-premium-request-status)](https://github.com/ToyBlackHat/copilot-premium-request-status/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/ToyBlackHat/copilot-premium-request-status)](https://github.com/ToyBlackHat/copilot-premium-request-status/commits/main)
+[![Issues](https://img.shields.io/github/issues/ToyBlackHat/copilot-premium-request-status)](https://github.com/ToyBlackHat/copilot-premium-request-status/issues)
+[![Stars](https://img.shields.io/github/stars/ToyBlackHat/copilot-premium-request-status?style=social)](https://github.com/ToyBlackHat/copilot-premium-request-status/stargazers)
+[![Forks](https://img.shields.io/github/forks/ToyBlackHat/copilot-premium-request-status?style=social)](https://github.com/ToyBlackHat/copilot-premium-request-status/network/members)
+[![Top Language](https://img.shields.io/github/languages/top/ToyBlackHat/copilot-premium-request-status)](https://github.com/ToyBlackHat/copilot-premium-request-status)
+
 VS Code extension that shows GitHub Copilot **premium requests usage** in the status bar (included vs billed), with manual and automatic refresh.
 
 ## Features
@@ -81,7 +89,7 @@ Extension settings namespace: `copilotPremiumRequests`
 ## How authentication works
 
 1. Extension checks secret storage key: `copilotPremiumRequests.pat`
-2. If missing, it requests VS Code GitHub auth session (`read:user`)
+2. If missing, it requests VS Code GitHub auth session (`user`)
 3. Token is used to call GitHub API for current month usage
 
 ## API used
