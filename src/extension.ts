@@ -64,9 +64,13 @@ async function refreshNow(ctx: vscode.ExtensionContext) {
     const mm = String(ts.getMinutes()).padStart(2, "0");
 
     const billedAmountSuffix = totals.hasAmountData
-      ? `(${formatUsd(totals.billedAmount)})`
+      ?
+        ` (${new Intl.NumberFormat("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(totals.billedAmount)}$)`
       : "";
-    const text = `${icon} Incl: ${totals.includedConsumed} | Bill: ${totals.billed}${billedAmountSuffix}`;
+    const text = `${icon} ${totals.includedConsumed} | ${totals.billed}${billedAmountSuffix}`;
     const amountLines = totals.hasAmountData
       ?
         `Included amount: ${formatUsd(totals.includedAmount)}\n` +
