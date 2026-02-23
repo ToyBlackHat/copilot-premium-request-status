@@ -1,0 +1,85 @@
+{
+  "name": "copilot-premium-requests-status",
+  "displayName": "Copilot Premium Requests Status",
+  "description": "Shows Copilot premium requests usage (included vs billed) in the VS Code status bar.",
+  "version": "0.1.0",
+  "publisher": "toyblackhat",
+  "author": "ToyBlackHat",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ToyBlackHat/copilot-premium-request-status.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ToyBlackHat/copilot-premium-request-status/issues"
+  },
+  "homepage": "https://github.com/ToyBlackHat/copilot-premium-request-status#readme",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copilotPremiumRequests.refresh",
+        "title": "Copilot Premium Requests: Refresh Now"
+      },
+      {
+        "command": "copilotPremiumRequests.setToken",
+        "title": "Copilot Premium Requests: Set / Update Token (Secure)"
+      },
+      {
+        "command": "copilotPremiumRequests.clearToken",
+        "title": "Copilot Premium Requests: Clear Stored Token"
+      }
+    ],
+    "configuration": {
+      "title": "Copilot Premium Requests Status",
+      "properties": {
+        "copilotPremiumRequests.refreshIntervalMinutes": {
+          "type": "number",
+          "default": 15,
+          "minimum": 5,
+          "description": "Background refresh interval in minutes."
+        },
+        "copilotPremiumRequests.productFilter": {
+          "type": "string",
+          "default": "Copilot",
+          "description": "Filter usageItems by product name (case-insensitive). Empty = sum all products."
+        },
+        "copilotPremiumRequests.statusBarAlignment": {
+          "type": "string",
+          "enum": ["left", "right"],
+          "default": "right",
+          "description": "Where to place the status bar item."
+        },
+        "copilotPremiumRequests.icon": {
+          "type": "string",
+          "default": "$(github)",
+          "description": "Status bar icon (Codicon syntax)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p .",
+    "watch": "tsc -watch -p .",
+    "package": "npx -y @vscode/vsce@latest package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.5.4"
+  }
+}
