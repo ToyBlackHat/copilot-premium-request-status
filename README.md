@@ -8,7 +8,6 @@
 [![Forks](https://img.shields.io/github/forks/ToyBlackHat/copilot-premium-request-status?style=social)](https://github.com/ToyBlackHat/copilot-premium-request-status/network/members)
 [![Top Language](https://img.shields.io/github/languages/top/ToyBlackHat/copilot-premium-request-status)](https://github.com/ToyBlackHat/copilot-premium-request-status)
 
-[📖 About](#about) • [💻 Install](#installation-local-development) • [🚀 Usage](#run-locally-in-vs-code)
 
 VS Code extension that shows GitHub Copilot **premium requests usage** in the status bar (included vs billed), with manual and automatic refresh.
 
@@ -16,7 +15,7 @@ VS Code extension that shows GitHub Copilot **premium requests usage** in the st
 
 **Never guess your Copilot usage again.** Track included vs billed requests in real-time, right in your editor's status bar. No context switching, no billing dashboard hunting.
 
-→ [Read full story →](ABOUT.md)
+[Read full story →](ABOUT.md)
 
 ## Features
 
