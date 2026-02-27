@@ -18,6 +18,13 @@ function formatUsd(value: number): string {
   }).format(value);
 }
 
+function formatTwoDecimals(value: number): string {
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(value);
+}
+
 function getConfig() {
   const cfg = vscode.workspace.getConfiguration("copilotPremiumRequests");
   return {
@@ -65,12 +72,9 @@ async function refreshNow(ctx: vscode.ExtensionContext) {
 
     const billedAmountSuffix = totals.hasAmountData
       ?
-        ` (${new Intl.NumberFormat("en-US", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }).format(totals.billedAmount)}$)`
+        ` (${formatTwoDecimals(totals.billedAmount)}$)`
       : "";
-    const text = `${icon} ${totals.includedConsumed} | ${totals.billed}${billedAmountSuffix}`;
+    const text = `${icon} ${formatTwoDecimals(totals.includedConsumed)} | ${formatTwoDecimals(totals.billed)}${billedAmountSuffix}`;
     const amountLines = totals.hasAmountData
       ?
         `Included amount: ${formatUsd(totals.includedAmount)}\n` +
@@ -79,9 +83,9 @@ async function refreshNow(ctx: vscode.ExtensionContext) {
       : "Amounts: not provided by API for this account/period\n";
     const tooltip =
       `Premium Requests (${productFilter || "All products"})\n` +
-      `Included: ${totals.includedConsumed}\n` +
-      `Billed: ${totals.billed}\n` +
-      `Total: ${totals.total}\n` +
+      `Included: ${formatTwoDecimals(totals.includedConsumed)}\n` +
+      `Billed: ${formatTwoDecimals(totals.billed)}\n` +
+      `Total: ${formatTwoDecimals(totals.total)}\n` +
       amountLines +
       `User: ${login}\n` +
       `Auth: ${source}\n` +

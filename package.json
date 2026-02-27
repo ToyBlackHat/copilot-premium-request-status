@@ -2,7 +2,7 @@
   "name": "copilot-premium-requests-status",
   "displayName": "Copilot Premium Requests Status",
   "description": "Shows Copilot premium requests usage (included vs billed) in the VS Code status bar.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "toyblackhat",
   "author": "ToyBlackHat",
   "license": "MIT",
@@ -49,7 +49,9 @@
   "engines": {
     "vscode": "^1.90.0"
   },
-  "categories": ["Other"],
+  "categories": [
+    "Other"
+  ],
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -85,7 +87,10 @@
         },
         "copilotPremiumRequests.statusBarAlignment": {
           "type": "string",
-          "enum": ["left", "right"],
+          "enum": [
+            "left",
+            "right"
+          ],
           "default": "right",
           "description": "Where to place the status bar item."
         },

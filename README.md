@@ -20,6 +20,7 @@ VS Code extension that shows GitHub Copilot **premium requests usage** in the st
 ## Features
 
 - Status bar summary: `Included | Billed`
+- Usage values normalized to `XX.XX` (rounded to 2 decimal places)
 - Tooltip with details: included, billed, total, user, auth source, last sync
 - Secure token storage in VS Code Secrets
 - Fallback auth through VS Code GitHub session
@@ -75,7 +76,7 @@ Then run the extension in VS Code using **Run Extension** (F5).
 Alternative (CLI):
 
 ```bash
-code --install-extension ./copilot-premium-requests-status-0.1.0.vsix
+code --install-extension ./copilot-premium-requests-status-0.1.1.vsix
 ```
 
 ## Commands
@@ -120,14 +121,15 @@ API version header: `X-GitHub-Api-Version: 2022-11-28`
 To create a new release and push `.vsix` to GitHub Releases:
 
 1. Update version in `package.json` (semver format)
-2. Commit changes
-3. Create tag (matches version):
+2. Update release notes in `CHANGELOG.md`
+3. Commit changes
+4. Create tag (matches version):
    ```bash
-   git tag v0.2.0
+  git tag v0.1.1
    git push origin main
-   git push origin v0.2.0
+  git push origin v0.1.1
    ```
-4. GitHub Actions workflow triggers automatically:
+5. GitHub Actions workflow triggers automatically:
    - Builds and packages extension
    - Creates GitHub Release with `.vsix` artifact
 

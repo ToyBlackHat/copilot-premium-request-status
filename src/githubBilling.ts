@@ -31,6 +31,10 @@ export type UsageTotals = {
 const GITHUB_API = "https://api.github.com";
 const API_VERSION = "2022-11-28";
 
+function roundToTwo(value: number): number {
+  return Math.round((value + Number.EPSILON) * 100) / 100;
+}
+
 async function ghFetch<T>(token: string, path: string): Promise<T> {
   const res = await fetch(`${GITHUB_API}${path}`, {
     method: "GET",
@@ -101,12 +105,12 @@ export function sumUsage(
   );
 
   return {
-    includedConsumed,
-    billed,
-    total,
-    includedAmount,
-    billedAmount,
-    totalAmount,
+    includedConsumed: roundToTwo(includedConsumed),
+    billed: roundToTwo(billed),
+    total: roundToTwo(total),
+    includedAmount: roundToTwo(includedAmount),
+    billedAmount: roundToTwo(billedAmount),
+    totalAmount: roundToTwo(totalAmount),
     hasAmountData
   };
 }
